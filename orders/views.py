@@ -1,6 +1,6 @@
 from rest_framework import generics
 from orders.models import Order, OrderItem
-from orders.serializers import OrderSerializer, OrderItemSerializer
+from orders.serializers import OrderSerializer, OrderSerializerStandard, OrderItemSerializer
 from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 from rest_framework import status
@@ -9,7 +9,11 @@ from products.models import Product
 
 class OrderCreateListView(generics.ListCreateAPIView):
     queryset = Order.objects.all()
-    serializer_class = OrderSerializer
+    
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return OrderSerializerStandard
+        return OrderSerializer
 
 
 class OrderRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
