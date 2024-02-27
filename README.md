@@ -2,12 +2,16 @@
 
 Ainda em construção.
 
-Objetivo: funcionar como um controle de estoque para um pequeno mercado como exemplo.
+Objetivo: funcionar como uma API REST em um controle de estoque para um pequeno mercado como exemplo.
 Pode ser escalada no futuro.
 
 # Sobre o projeto [PT-BR]
 
-Nesse projeto foi utilizado Django REST framework 
+Nesse projeto foi utilizado Django REST framework.
+
+O esquema dos módulos desenvolvidos segue a imagem:
+
+![Schema](Schema.png)
 
 # Tecnologias utilizadas
 ## Back end

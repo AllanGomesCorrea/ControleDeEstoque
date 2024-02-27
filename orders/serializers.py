@@ -6,7 +6,15 @@ class OrderSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Order
+        fields = ['user','date']
+
+
+class OrderSerializerStandard(serializers.ModelSerializer):
+
+    class Meta:
+        model = Order
         fields = '__all__'
+
 
 class OrderItemSerializer(serializers.ModelSerializer):
 
