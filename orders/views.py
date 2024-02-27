@@ -5,6 +5,7 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 from rest_framework import status
 from products.models import Product
+from decimal import Decimal
 
 
 class OrderCreateListView(generics.ListCreateAPIView):
@@ -20,6 +21,7 @@ class OrderRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
 
+
 class OrderItemCreateListView(generics.ListCreateAPIView):
     queryset = OrderItem.objects.all()
     serializer_class = OrderItemSerializer
@@ -27,7 +29,7 @@ class OrderItemCreateListView(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         product_id = int(self.request.data.get('product'))
         quantity = int(self.request.data.get('quantity'))
-        subtotal = self.request.data.get('subtotal')
+        subtotal = Decimal(self.request.data.get('subtotal'))
         order_id = int(self.request.data.get('order'))
         product = Product.objects.get(pk=product_id)
         order = Order.objects.get(pk=order_id)
@@ -39,6 +41,8 @@ class OrderItemCreateListView(generics.ListCreateAPIView):
         serializer.instance = order_item
         product.stock_quantity = product.stock_quantity - quantity
         product.save()
+        order.total = order.total + subtotal
+        order.save()
     
     def create(self, request, *args, **kwargs):
         try:
