@@ -9,7 +9,7 @@ Pode ser escalada no futuro.
 
 Nesse projeto foi utilizado Django REST framework.
 
-O esquema dos módulos desenvolvidos segue a imagem:
+O esquema dos módulos desenvolvidos seguem a imagem:
 
 ![Schema](Schema.png)
 
