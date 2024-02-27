@@ -6,9 +6,12 @@ from rest_framework.response import Response
 from rest_framework import status
 from products.models import Product
 from decimal import Decimal
+from rest_framework.permissions import IsAuthenticated
+from app.permissions import GlobalDefaultPermission
 
 
 class OrderCreateListView(generics.ListCreateAPIView):
+    permission_classes = (IsAuthenticated, GlobalDefaultPermission,)
     queryset = Order.objects.all()
     
     def get_serializer_class(self):
@@ -18,11 +21,13 @@ class OrderCreateListView(generics.ListCreateAPIView):
 
 
 class OrderRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (IsAuthenticated, GlobalDefaultPermission,)
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
 
 
 class OrderItemCreateListView(generics.ListCreateAPIView):
+    permission_classes = (IsAuthenticated, GlobalDefaultPermission,)
     queryset = OrderItem.objects.all()
     serializer_class = OrderItemSerializer
     
@@ -53,5 +58,6 @@ class OrderItemCreateListView(generics.ListCreateAPIView):
 
 
 class OrderItemRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (IsAuthenticated, GlobalDefaultPermission,)
     queryset = OrderItem.objects.all()
     serializer_class = OrderItemSerializer

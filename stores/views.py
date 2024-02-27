@@ -5,19 +5,24 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 from rest_framework import status
 from products.models import Product
+from rest_framework.permissions import IsAuthenticated
+from app.permissions import GlobalDefaultPermission
 
 
 class StoreCreateListView(generics.ListCreateAPIView):
+    permission_classes = (IsAuthenticated, GlobalDefaultPermission,)
     queryset = Store.objects.all()
     serializer_class = StoreSerializer
 
 
 class StoreRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (IsAuthenticated, GlobalDefaultPermission,)
     queryset = Store.objects.all()
     serializer_class = StoreSerializer
 
 
 class StockMovementCreateListView(generics.ListCreateAPIView):
+    permission_classes = (IsAuthenticated, GlobalDefaultPermission,)
     queryset = StockMovement.objects.all()
     serializer_class = StockMovementSerializer
     
@@ -50,5 +55,6 @@ class StockMovementCreateListView(generics.ListCreateAPIView):
 
 
 class StockMovementRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (IsAuthenticated, GlobalDefaultPermission,)
     queryset = StockMovement.objects.all()
     serializer_class = StockMovementSerializer
